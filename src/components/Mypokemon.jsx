@@ -4,9 +4,9 @@ import ball from '../images/pokeball.png';
 
 const Wrapper = styled.div`
   height: 200px;
-  width: 95%;
+  width: 98%;
   border-radius: 10px;
-  background-color: #e2e2e2;
+  background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -30,7 +30,9 @@ const List = styled.div`
   align-items: center;
   border: dashed 2px;
   border-color: lightgray;
+  border-radius: 20px;
   width: 80px;
+  min-width: 80px;
   height: 80px;
   padding: 7px;
 `;
