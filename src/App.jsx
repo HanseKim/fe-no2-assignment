@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Main from './pages/Main';
+import Pokemon from './pages/Pokemon';
 
 function App() {
   return (
-    <>
-      <Main></Main>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/pokemon" element={<Pokemon />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

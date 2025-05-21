@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import logo from '../images/pokemon-logo.png';
 import styled from 'styled-components';
@@ -31,10 +31,12 @@ const Button = styled.button`
 `;
 
 const Main = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
-      <Image src={logo} alt="" />
-      <Button onClick={() => {}}>포켓몬 도감 시작하기</Button>
+      <Image src={logo} alt="Pokemon logo" />
+      <Button onClick={() => navigate('/pokemon')}>포켓몬 도감 시작하기</Button>
     </Wrapper>
   );
 };
