@@ -23,6 +23,7 @@ export default [
       'react-refresh': reactRefresh,
     },
     rules: {
+      'react/prop-types': 'off', // 타입 체크 꺼두기
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       'no-unused-vars': ['warn', { varsIgnorePattern: '^_' }],

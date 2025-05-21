@@ -1,7 +1,14 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
-const PokemonList = () => {
-  return <div>포케몬 리스트</div>;
+const PokemonList = ({ datas }) => {
+  return (
+    <ul>
+      {datas.map((pokemon, idx) => (
+        <li key={idx}>{pokemon.name}</li>
+      ))}
+    </ul>
+  );
 };
 
 export default PokemonList;

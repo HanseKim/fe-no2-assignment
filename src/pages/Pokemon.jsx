@@ -2,6 +2,7 @@ import React from 'react';
 import Mypokemon from '../components/Mypokemon';
 import PokemonList from '../components/PokemonList';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,10 +12,13 @@ const Wrapper = styled.div`
 `;
 
 const Pokemon = () => {
+  const location = useLocation();
+  const data = location.state?.data || [];
+
   return (
     <Wrapper>
       <Mypokemon />
-      <PokemonList />
+      <PokemonList datas={data} />
     </Wrapper>
   );
 };
