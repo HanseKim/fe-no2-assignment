@@ -1,10 +1,22 @@
-import { useState, useEffect } from 'react';
 import React from 'react';
-import logo from '../images/pokemon-logo.png';
+import Mypokemon from '../components/Mypokemon';
+import PokemonList from '../components/PokemonList';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Pokemon = () => {
-  return <div>포케몬 도감</div>;
+  return (
+    <Wrapper>
+      <Mypokemon />
+      <PokemonList />
+    </Wrapper>
+  );
 };
 
 export default Pokemon;
