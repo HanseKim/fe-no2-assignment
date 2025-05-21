@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -12,10 +12,12 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
   color: red;
-  font-size: 30px;
+  font-size: 20px;
 `;
 const ListWrap = styled.div``;
+
 const Mypokemon = () => {
+  const [pokemons, setPokeons] = useState([]);
   return (
     <Wrapper>
       <Title>나만의 포켓몬</Title>
