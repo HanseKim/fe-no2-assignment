@@ -13,12 +13,12 @@ const Wrapper = styled.div`
 
 const Pokemon = () => {
   const location = useLocation();
-  const data = location.state?.data || [];
+  const pokemonData = location.state?.data || [];
 
   return (
     <Wrapper>
       <Mypokemon />
-      <PokemonList datas={data} />
+      <PokemonList pokemonData={pokemonData} />
     </Wrapper>
   );
 };

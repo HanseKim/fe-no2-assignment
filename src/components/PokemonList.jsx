@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-const PokemonList = ({ datas }) => {
+const PokemonList = ({ pokemonData }) => {
   return (
     <ul>
-      {datas.map((pokemon, idx) => (
-        <li key={idx}>{pokemon.name}</li>
+      {pokemonData.map((pokemon, idx) => (
+        <li key={idx}>
+          {pokemon.name} <img src={pokemon.image} alt="" />
+        </li>
       ))}
     </ul>
   );

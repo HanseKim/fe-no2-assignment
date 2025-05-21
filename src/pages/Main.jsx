@@ -4,6 +4,7 @@ import React from 'react';
 import logo from '../images/pokemon-logo.png';
 import styled from 'styled-components';
 import instance from '../api/api';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,7 +38,27 @@ const Main = () => {
   const getPokemon = async () => {
     const res = await instance.get('/pokemon?limit=150&offset=0');
     const pokemonData = res.data.results;
-    navigate('/pokemon', { state: { data: pokemonData } }); // ✅ 데이터 넘기기
+    // 이렇게 하면 Promise 배열로 들어가기 때문에 번거로움
+    // const Detail = await pokemonData.map(async (pokemon) => {
+    //   const detail = await axios.get(pokemon.url);
+    //   // console.log(detail.data.sprites.front_default);
+    //   return {
+    //     name: pokemon.name,
+    //     image: detail.data.sprites.front_default,
+    //   };
+    // });
+    const Detail = await Promise.all(
+      pokemonData.map(async (pokemon) => {
+        const detail = await axios.get(pokemon.url);
+        return {
+          name: pokemon.name,
+          image: detail.data.sprites.front_default,
+        };
+      })
+    );
+
+    console.log(Detail);
+    navigate('/pokemon', { state: { data: Detail } });
   };
 
   return (
