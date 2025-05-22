@@ -101,6 +101,8 @@ const Main = () => {
       description: p.description,
     }));
     setPokemon(Detail);
+    // 로컬에도 저장
+    localStorage.setItem('pokemon', Detail);
     navigate('/pokemon');
   };
 
