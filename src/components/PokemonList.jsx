@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useContext } from 'react';
+import PokemonContext from '../context/context';
 import styled from 'styled-components';
 import Pokemon from './PokemonCard';
 
@@ -16,11 +17,12 @@ const ListWrap = styled.ul`
   align-items: center;
 `;
 
-const PokemonList = ({ pokemonData, addPokemon }) => {
+const PokemonList = ({ addPokemon }) => {
+  const { pokemon } = useContext(PokemonContext);
   return (
     <Wrapper>
       <ListWrap>
-        {pokemonData.map((pokemon, idx) => (
+        {pokemon.map((pokemon, idx) => (
           <Pokemon key={idx} pokemon={pokemon} fun={addPokemon} />
         ))}
       </ListWrap>

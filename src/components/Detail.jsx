@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const Wrapper = styled.div`
@@ -34,7 +34,6 @@ const Button = styled.button`
 `;
 
 const Detail = () => {
-  const { id } = useParams();
   const location = useLocation();
   const pokemonData = location.state?.data || [];
   const navigate = useNavigate();

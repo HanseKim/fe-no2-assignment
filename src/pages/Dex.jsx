@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import PokemonContext from '../context/context';
 import Dashboard from '../components/Dashboard';
 import PokemonList from '../components/PokemonList';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,20 +12,8 @@ const Wrapper = styled.div`
 `;
 
 const Dex = () => {
-  const location = useLocation();
-  const [pokemonData, setPokemon] = useState(location.state?.data || []);
-  const [pokeList, setPokeList] = useState([0, 0, 0, 0, 0, 0]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('pokemon');
-    if (saved) {
-      setPokemon(JSON.parse(saved));
-    } else {
-      const data = location.state?.data || [];
-      setPokemon(data);
-      localStorage.setItem('pokemon', JSON.stringify(data));
-    }
-  }, [location.state]);
+  const { pokemon } = useContext(PokemonContext);
+  const { pokeList, setPokeList } = useContext(PokemonContext);
 
   const addPokemon = (pokemon) => {
     if (pokeList[5] != 0) {
@@ -44,7 +32,6 @@ const Dex = () => {
     const newList = [...pokeList];
     newList[emptyIndex] = pokemon;
     setPokeList(newList);
-    localStorage.setItem('pokeList', newList);
   };
 
   // 이상함..
@@ -101,13 +88,12 @@ const Dex = () => {
     const newList = [...filtered, ...Array(6 - filtered.length).fill(0)];
 
     setPokeList(newList);
-    localStorage.setItem('pokeList', newList);
   };
 
   return (
     <Wrapper>
       <Dashboard pokeList={pokeList} deletePokemon={deletePokemon} />
-      <PokemonList pokemonData={pokemonData} addPokemon={addPokemon} />
+      <PokemonList addPokemon={addPokemon} />
     </Wrapper>
   );
 };

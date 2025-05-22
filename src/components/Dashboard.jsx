@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useContext } from 'react';
+import PokemonContext from '../context/context';
 import styled from 'styled-components';
 import ball from '../images/pokeball.png';
 import PokemonCard from './PokemonCard';
@@ -46,7 +47,8 @@ const ListItem = styled.img`
   height: 70%;
 `;
 
-const Dashboard = ({ pokeList, deletePokemon }) => {
+const Dashboard = ({ deletePokemon }) => {
+  const { pokeList } = useContext(PokemonContext);
   return (
     <Wrapper>
       <Title>나만의 포켓몬</Title>
