@@ -1,12 +1,37 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 
-// {id: 1,
-//   name: "이상해씨",
-//    image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-//     types: ["풀", "독"],
-//     description: "풀과 독 타입의 포켓몬으로, 귀여운 식물 모양을 하고 있습니다."}
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+`;
+const Img = styled.img`
+  width: 200px;
+  height: 200px;
+`;
+const Name = styled.p`
+  font-size: x-large;
+  color: red;
+`;
+const Button = styled.button`
+  width: 80px;
+  height: 40px;
+  border: none;
+  background-color: lightgray;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+
+  &:hover {
+    border: 2px solid lightblue;
+  }
+`;
 
 const Detail = () => {
   const { id } = useParams();
@@ -15,12 +40,12 @@ const Detail = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <img src={pokemonData.image} alt="" />
-      <p>{pokemonData.name}</p>
+    <Wrapper>
+      <Img src={pokemonData.image} alt="" />
+      <Name>{pokemonData.name}</Name>
       <p>{pokemonData.description}</p>
-      <button onClick={() => navigate('/pokemon')}>뒤로가기</button>
-    </div>
+      <Button onClick={() => navigate('/pokemon')}>뒤로가기</Button>
+    </Wrapper>
   );
 };
 
