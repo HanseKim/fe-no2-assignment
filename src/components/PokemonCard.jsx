@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const ListItem = styled.li`
   display: flex;
@@ -23,7 +24,6 @@ const ListItem = styled.li`
     /* transform: scale(1.05); */
     transform: translateY(-7px);
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
-    /* border-color: red; */
   }
 `;
 
@@ -61,12 +61,24 @@ const Button = styled.button`
 `;
 
 const PokemonCard = ({ pokemon, fun, del = false }) => {
+  const navigate = useNavigate();
   return (
-    <ListItem>
+    <ListItem
+      onClick={() => {
+        navigate(`/pokemon/${pokemon.id}`, { state: { data: pokemon } });
+      }}
+    >
       <Image src={pokemon.image} />
       <Name>{pokemon.name}</Name>
       <Number>No.{pokemon.id}</Number>
-      <Button onClick={() => fun(pokemon)}>{del ? '제거' : '추가'}</Button>
+      <Button
+        onClick={(e) => {
+          fun(pokemon);
+          e.stopPropagation();
+        }}
+      >
+        {del ? '제거' : '추가'}
+      </Button>
     </ListItem>
   );
 };

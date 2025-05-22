@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   padding: 20px 0;
-  min-height: 200px; /* ← 최소 높이 */
+  min-height: 200px;
   height: auto;
 `;
 const Title = styled.div`
@@ -25,10 +25,9 @@ const ListWrap = styled.ul`
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  /* padding: 5px; */
   margin: 5px;
   padding: 20px 0;
-  min-height: 100px; /* ← 최소 높이 */
+  min-height: 100px;
   height: auto;
 `;
 const List = styled.div`
@@ -42,12 +41,12 @@ const List = styled.div`
   height: 80px;
   width: 80px;
 `;
-
 const ListItem = styled.img`
   width: 70%;
   height: 70%;
 `;
-const Mypokemon = ({ pokeList, deletePokemon }) => {
+
+const Dashboard = ({ pokeList, deletePokemon }) => {
   return (
     <Wrapper>
       <Title>나만의 포켓몬</Title>
@@ -75,4 +74,4 @@ const Mypokemon = ({ pokeList, deletePokemon }) => {
   );
 };
 
-export default Mypokemon;
+export default Dashboard;

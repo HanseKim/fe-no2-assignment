@@ -1,18 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Main from './pages/Main';
-import Pokemon from './pages/Pokemon';
+import Home from './pages/Home';
+import Dex from './pages/Dex';
 import GlobalStyle from './GlobalStyle';
+import Detail from './components/Detail';
 
 function App() {
   return (
     <>
-      <GlobalStyle /> {/* ✅ 전역 스타일 추가 */}
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/pokemon" element={<Pokemon />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/pokemon" element={<Dex />} />
+          <Route path="/pokemon/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </>
