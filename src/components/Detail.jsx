@@ -23,13 +23,13 @@ const Button = styled.button`
   width: 80px;
   height: 40px;
   border: none;
-  background-color: lightgray;
+  background-color: #f1f1f1;
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.1s ease;
 
   &:hover {
-    border: 2px solid lightblue;
+    border: 2px solid lightskyblue;
   }
 `;
 
