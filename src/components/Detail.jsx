@@ -2,6 +2,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addToPokeList } from '../features/pokemon/pokemonSlice';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,10 +34,26 @@ const Button = styled.button`
     border: 2px solid lightskyblue;
   }
 `;
+const PlusBtn = styled.button`
+  background-color: red;
+  color: white;
+  margin-top: 10px;
+  width: 80px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #8b3939;
+  }
+`;
 
 const Detail = () => {
   const location = useLocation();
   const pokemonData = location.state?.data || [];
+  const del = location.state?.del || false;
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   return (
@@ -44,6 +62,18 @@ const Detail = () => {
       <Name>{pokemonData.name}</Name>
       <p>{pokemonData.description}</p>
       <Button onClick={() => navigate('/pokemon')}>뒤로가기</Button>
+      {del ? (
+        <></>
+      ) : (
+        <PlusBtn
+          onClick={() => {
+            dispatch(addToPokeList(pokemonData));
+            navigate('/pokemon');
+          }}
+        >
+          추가
+        </PlusBtn>
+      )}
     </Wrapper>
   );
 };
