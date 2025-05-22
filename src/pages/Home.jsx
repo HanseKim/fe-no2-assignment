@@ -102,7 +102,7 @@ const Main = () => {
     }));
     setPokemon(Detail);
     // 로컬에도 저장
-    localStorage.setItem('pokemon', Detail);
+    localStorage.setItem('pokemon', JSON.stringify(Detail));
     navigate('/pokemon');
   };
 
