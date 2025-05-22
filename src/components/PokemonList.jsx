@@ -18,7 +18,10 @@ const ListWrap = styled.ul`
 `;
 
 const PokemonList = ({ addPokemon }) => {
-  const { pokemon } = useContext(PokemonContext);
+  const { pokemon, setPokemon } = useContext(PokemonContext);
+  if (pokemon == null) {
+    setPokemon(localStorage.getItem('pokemon'));
+  }
   return (
     <Wrapper>
       <ListWrap>
