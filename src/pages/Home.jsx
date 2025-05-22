@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../images/pokemon-logo.png';
 import styled from 'styled-components';
 // import instance from '../api/api';
 import MOCK_DATA from '../mock';
+import PokemonContext from '../context/context';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ const Button = styled.button`
 
 const Main = () => {
   const navigate = useNavigate();
+  const { setPokemon } = useContext(PokemonContext);
   // const getPokemon = async () => {
   //   const res = await instance.get('/pokemon?limit=150&offset=0');
   //   const pokemonData = res.data.results;
@@ -98,8 +100,8 @@ const Main = () => {
       types: p.types,
       description: p.description,
     }));
-
-    navigate('/pokemon', { state: { data: Detail } });
+    setPokemon(Detail);
+    navigate('/pokemon');
   };
 
   return (

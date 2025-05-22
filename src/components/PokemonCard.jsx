@@ -26,7 +26,6 @@ const ListItem = styled.li`
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
   }
 `;
-
 const Image = styled.img`
   width: 100px;
   height: 100px;
