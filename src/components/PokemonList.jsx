@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
-import PokemonContext from '../context/context';
+import React, { useEffect } from 'react';
+// import PokemonContext from '../context/context';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPokemon } from '../features/pokemon/pokemonSlice';
 import styled from 'styled-components';
 import Pokemon from './PokemonCard';
 
@@ -18,10 +20,18 @@ const ListWrap = styled.ul`
 `;
 
 const PokemonList = ({ addPokemon }) => {
-  const { pokemon, setPokemon } = useContext(PokemonContext);
-  if (pokemon == null) {
-    setPokemon(localStorage.getItem('pokemon'));
-  }
+  // const { pokemon, setPokemon } = useContext(PokemonContext);
+  const pokemon = useSelector((state) => state.pokemon.pokemon);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!pokemon || pokemon.length === 0) {
+      const saved = localStorage.getItem('pokemon');
+      if (saved) {
+        dispatch(setPokemon(JSON.parse(saved)));
+      }
+    }
+  }, [dispatch, pokemon]);
+
   return (
     <Wrapper>
       <ListWrap>
