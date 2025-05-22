@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const ListItem = styled.li`
   display: flex;
@@ -15,8 +16,17 @@ const ListItem = styled.li`
   border-radius: 10px;
   margin: 10px;
   list-style: none;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); // ← 그림자 추가
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    /* transform: scale(1.05); */
+    transform: translateY(-7px);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+  }
 `;
+
 const Image = styled.img`
   width: 100px;
   height: 100px;
@@ -45,15 +55,30 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    background-color: #8b3939;
+  }
 `;
 
 const PokemonCard = ({ pokemon, fun, del = false }) => {
+  const navigate = useNavigate();
   return (
-    <ListItem>
+    <ListItem
+      onClick={() => {
+        navigate(`/pokemon/${pokemon.id}`, { state: { data: pokemon } });
+      }}
+    >
       <Image src={pokemon.image} />
       <Name>{pokemon.name}</Name>
       <Number>No.{pokemon.id}</Number>
-      <Button onClick={() => fun(pokemon)}>{del ? '제거' : '추가'}</Button>
+      <Button
+        onClick={(e) => {
+          fun(pokemon);
+          e.stopPropagation();
+        }}
+      >
+        {del ? '제거' : '추가'}
+      </Button>
     </ListItem>
   );
 };

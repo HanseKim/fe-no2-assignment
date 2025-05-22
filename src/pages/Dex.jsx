@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Mypokemon from '../components/Mypokemon';
+import React, { useState, useEffect } from 'react';
+import Dashboard from '../components/Dashboard';
 import PokemonList from '../components/PokemonList';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
@@ -11,19 +11,30 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Pokemon = () => {
+const Dex = () => {
   const location = useLocation();
-  const pokemonData = location.state?.data || [];
+  const [pokemonData, setPokemon] = useState(location.state?.data || []);
   const [pokeList, setPokeList] = useState([0, 0, 0, 0, 0, 0]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('pokemon');
+    if (saved) {
+      setPokemon(JSON.parse(saved));
+    } else {
+      const data = location.state?.data || [];
+      setPokemon(data);
+      localStorage.setItem('pokemon', JSON.stringify(data));
+    }
+  }, [location.state]);
 
   const addPokemon = (pokemon) => {
     if (pokeList[5] != 0) {
-      alert('이미 6개까지 추가됐습니다');
+      alert('더 이상 선택할 수 없습니다.');
       return;
     }
     //[].some() : 배열에 조건을 만족하는게 하나라도 있으면 true
     if (pokeList.some((p) => p !== 0 && p.id === pokemon.id)) {
-      alert('이미 추가되어있습니다 !');
+      alert('이미 선택된 포켓몬입니다.');
       return;
     }
 
@@ -33,6 +44,7 @@ const Pokemon = () => {
     const newList = [...pokeList];
     newList[emptyIndex] = pokemon;
     setPokeList(newList);
+    localStorage.setItem('pokeList', newList);
   };
 
   // 이상함..
@@ -80,6 +92,7 @@ const Pokemon = () => {
   //     setPokeList(newList);
   //   }
   // };
+
   const deletePokemon = (pokemon) => {
     // 0이 아닌 포켓몬 중 삭제 대상이 아닌 것만 남김
     const filtered = pokeList.filter((p) => p !== 0 && p.id !== pokemon.id);
@@ -88,14 +101,15 @@ const Pokemon = () => {
     const newList = [...filtered, ...Array(6 - filtered.length).fill(0)];
 
     setPokeList(newList);
+    localStorage.setItem('pokeList', newList);
   };
 
   return (
     <Wrapper>
-      <Mypokemon pokeList={pokeList} deletePokemon={deletePokemon} />
+      <Dashboard pokeList={pokeList} deletePokemon={deletePokemon} />
       <PokemonList pokemonData={pokemonData} addPokemon={addPokemon} />
     </Wrapper>
   );
 };
 
-export default Pokemon;
+export default Dex;
