@@ -64,7 +64,9 @@ const PokemonCard = ({ pokemon, fun, del = false }) => {
   return (
     <ListItem
       onClick={() => {
-        navigate(`/pokemon/${pokemon.id}`, { state: { data: pokemon } });
+        navigate(`/pokemon/${pokemon.id}`, {
+          state: { data: pokemon, del: del },
+        });
       }}
     >
       <Image src={pokemon.image} />
