@@ -38,7 +38,9 @@ const Main = () => {
   const getPokemon = async () => {
     const res = await instance.get('/pokemon?limit=150&offset=0');
     const pokemonData = res.data.results;
-    // 이렇게 하면 Promise 배열로 들어가기 때문에 번거로움
+
+    // 문제 1. 이렇게 하면 Promise 배열로 들어가기 때문에 번거로움
+
     // const Detail = await pokemonData.map(async (pokemon) => {
     //   const detail = await axios.get(pokemon.url);
     //   // console.log(detail.data.sprites.front_default);
@@ -47,12 +49,43 @@ const Main = () => {
     //     image: detail.data.sprites.front_default,
     //   };
     // });
+
+    // 문제 2. 영어이름만 받아옴
+
+    // const Detail = await Promise.all(
+    //   pokemonData.map(async (pokemon) => {
+    //     const detail = await axios.get(pokemon.url);
+    //     return {
+    //       name: pokemon.name,
+    //       image: detail.data.sprites.front_default,
+    //     };
+    //   })
+    // );
+
     const Detail = await Promise.all(
-      pokemonData.map(async (pokemon) => {
-        const detail = await axios.get(pokemon.url);
+      pokemonData.map(async (pokemon, index) => {
+        const id = index + 1;
+
+        const detailRes = await instance.get(`/pokemon/${id}`);
+        const types = detailRes.data.types.map((t) => t.type.name);
+
+        const speciesRes = await instance.get(`/pokemon-species/${id}`);
+
+        const koreanName =
+          speciesRes.data.names.find((n) => n.language.name === 'ko')?.name ||
+          pokemon.name;
+
+        const koreanDescription =
+          speciesRes.data.flavor_text_entries
+            .find((entry) => entry.language.name === 'ko')
+            ?.flavor_text.replace(/\f|\n/g, ' ') || '';
+
         return {
-          name: pokemon.name,
-          image: detail.data.sprites.front_default,
+          id,
+          name: koreanName,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
+          types,
+          description: koreanDescription,
         };
       })
     );

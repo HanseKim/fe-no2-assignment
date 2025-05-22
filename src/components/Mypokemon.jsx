@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ball from '../images/pokeball.png';
+import PokemonCard from './PokemonCard';
 
 const Wrapper = styled.div`
   height: 200px;
@@ -40,21 +42,25 @@ const ListItem = styled.img`
   width: 70%;
   height: 70%;
 `;
-
-const Mypokemon = () => {
-  const [pokeList, setPokeList] = useState([0, 0, 0, 0, 0, 0]);
-
+const Mypokemon = ({ pokeList, deletePokemon }) => {
   return (
     <Wrapper>
       <Title>나만의 포켓몬</Title>
       <ListWrap>
         {pokeList.map((poke, index) => {
-          if (poke == 0)
+          if (poke === 0) {
             return (
               <List key={index}>
-                <ListItem src={ball} />
+                <ListItem src={ball} alt="빈 포켓볼" />
               </List>
             );
+          } else {
+            return (
+              <List key={index}>
+                <PokemonCard pokemon={poke} fun={deletePokemon} />
+              </List>
+            );
+          }
         })}
       </ListWrap>
     </Wrapper>
