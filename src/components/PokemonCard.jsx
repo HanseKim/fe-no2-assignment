@@ -47,13 +47,13 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const PokemonCard = ({ pokemon, fun }) => {
+const PokemonCard = ({ pokemon, fun, del = false }) => {
   return (
     <ListItem>
       <Image src={pokemon.image} />
       <Name>{pokemon.name}</Name>
       <Number>No.{pokemon.id}</Number>
-      <Button onClick={() => fun(pokemon)}>추가</Button>
+      <Button onClick={() => fun(pokemon)}>{del ? '제거' : '추가'}</Button>
     </ListItem>
   );
 };

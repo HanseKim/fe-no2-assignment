@@ -35,6 +35,7 @@ const Pokemon = () => {
     setPokeList(newList);
   };
 
+  // 이상함..
   // const deletePokemon = (pokemon) => {
   //   console.log('Minus');
   //   if (pokeList.some((p) => p !== 0 && p.id === pokemon.id)) {
@@ -45,6 +46,8 @@ const Pokemon = () => {
   //     return;
   //   }
   // };
+
+  // 앞에 포켓몬 지원도 안땡겨짐
   // const deletePokemon = (pokemon) => {
   //   const deleteIndex = pokeList.findIndex(
   //     (p) => p !== 0 && p.id === pokemon.id
@@ -56,6 +59,8 @@ const Pokemon = () => {
   //     setPokeList(newList);
   //   }
   // };
+
+  // 포문으로
   // const deletePokemon = (pokemon) => {
   //   const deleteIndex = pokeList.findIndex(
   //     (p) => p !== 0 && p.id === pokemon.id
